@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html style="direction: ltr;" data-dir="ltr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>第七次课《Mongoose应用与Express配置》将爬虫采集的信息存入Mongodb数据库，Mongodb的增删改查【2017.01.12快来听直播】 | 动脑学院-论坛</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="content-type" content="text/html; charset=UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta property="og:site_name" content="动脑学院-论坛">
+	<meta name="keywords">
+	<meta name="msapplication-badge" content="frequency=30; polling-uri=http://localhost:4567/sitemap.xml">
+	<meta name="msapplication-square150x150logo">
+	<meta name="title" content="作业提交示范【贴代码】--爬虫作业【快来跟帖】">
+	<meta name="description" content="&amp;#x2F;* * 目标站点：http:&amp;#x2F;&amp;#x2F;www.topit.me * 目标数据：图片链接 * 作者： Song * 时间：2017.01.11 *&amp;#x2F;  &amp;#x2F;&amp;#x2F; 控制台大法  &amp;#x2F;&amp;#x2F; var items = document.querySelectorAll(&amp;#x27;div.e.m&amp;gt;a&amp;#x27;); &amp;#x2F;&amp;#x2F; for (var i = 0; i &amp;lt; items.length; i++) { &amp;#x2F;&amp;#x2F;     console.log(items[i].getAttribute(&amp;#x27;href&amp;#x27;)) &amp;#x2F;&amp;#x2F; }  var request = req...">
+	<meta property="og:title" content="作业提交示范【贴代码】--爬虫作业【快来跟帖】">
+	<meta property="og:description" content="&amp;#x2F;* * 目标站点：http:&amp;#x2F;&amp;#x2F;www.topit.me * 目标数据：图片链接 * 作者： Song * 时间：2017.01.11 *&amp;#x2F;  &amp;#x2F;&amp;#x2F; 控制台大法  &amp;#x2F;&amp;#x2F; var items = document.querySelectorAll(&amp;#x27;div.e.m&amp;gt;a&amp;#x27;); &amp;#x2F;&amp;#x2F; for (var i = 0; i &amp;lt; items.length; i++) { &amp;#x2F;&amp;#x2F;     console.log(items[i].getAttribute(&amp;#x27;href&amp;#x27;)) &amp;#x2F;&amp;#x2F; }  var request = req...">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="http://localhost:4567/topic/28/作业提交示范-贴代码-爬虫作业-快来跟帖">
+	<meta property="og:image" content="https://secure.gravatar.com/avatar/b1c526b6f5a24ff84f74f83d2551ce3f?size=128&amp;default=identicon&amp;rating=pg">
+	<meta property="og:image:url" content="https://secure.gravatar.com/avatar/b1c526b6f5a24ff84f74f83d2551ce3f?size=128&amp;default=identicon&amp;rating=pg">
+	<meta property="article:published_time" content="2017-01-11T02:03:14.077Z">
+	<meta property="article:modified_time" content="2017-01-12T11:40:59.195Z">
+	<meta property="article:section" content="博客">
+	<link rel="stylesheet" type="text/css" href="lesson7_files/stylesheet.css">
+	
+	
+	<link rel="alternate" type="application/rss+xml" href="http://localhost:4567/topic/28.rss">
+	<link rel="canonical" href="http://localhost:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96">
+	<link rel="up" href="http://localhost:4567/category/3/%E5%8D%9A%E5%AE%A2">
+
+	<!--[if lt IE 9]>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.min.js"></script>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+  		<script>__lt_ie_9__ = 1;</script>
+	<![endif]-->
+
+	<script>
+		var RELATIVE_PATH = "";
+		var config = JSON.parse('{"relative_path":"","socketioTransports":["polling","websocket"],"websocketAddress":"","version":"0.6.1","siteTitle":"动脑学院-论坛","showSiteTitle":true,"postDelay":"10","minimumTitleLength":"3","maximumTitleLength":"255","minimumPostLength":"8","maximumPostLength":"32767","hasImageUploadPlugin":false,"maximumProfileImageSize":"256","minimumUsernameLength":"2","maximumUsernameLength":"16","minimumPasswordLength":"6","maximumSignatureLength":"255","useOutgoingLinksPage":false,"allowGuestSearching":false,"allowGuestHandles":false,"allowFileUploads":false,"allowTopicsThumbnail":false,"allowAccountDelete":true,"privateUserInfo":false,"usePagination":false,"disableSocialButtons":false,"disableChat":false,"maxReconnectionAttempts":5,"reconnectionDelay":200,"tagsPerTopic":5,"topicsPerPage":20,"postsPerPage":10,"maximumFileSize":"2048","theme:id":"nodebb-theme-lavender","defaultLang":"zh_CN","userLang":"zh_CN","loggedIn":true,"cache-buster":"stable-7-g176a215","script-buster":"13eace1a","css-buster":"77cb75d3","requireEmailConfirmation":false,"topicPostSort":"oldest_to_newest","categoryTopicSort":"newest_to_oldest","csrf_token":"uquUpCcj-f0S0lDyoBGdUa1uXlBAP7VtUxKM","searchEnabled":false,"notificationSounds":false,"openOutgoingLinksInNewTab":false,"topicSearchEnabled":false}');
+		var app = {};
+		app.user = JSON.parse('{"username":"Song","userslug":"song","picture":"https://secure.gravatar.com/avatar/b1c526b6f5a24ff84f74f83d2551ce3f?size=128&default=identicon&rating=pg","status":"online","email:confirmed":false,"banned":"0","uid":"1","isAdmin":true}');
+	</script>
+	<script src="lesson7_files/nodebb.js"></script>
+	<script>
+		require.config({
+			baseUrl: "/src/modules",
+			waitSeconds: 3,
+			urlArgs: "stable-7-g176a215",
+			paths: {
+				'forum': '../forum',
+				'vendor': '../../vendor'
+			}
+		});
+	</script>
+
+	
+	
+
+<link rel="stylesheet" href="lesson7_files/railscasts.css"><link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABT0lEQVQ4jbWSMWuDUBRGA4UO2Tp07Y/wWhMzOJghwZIhi9AOWZy6NiI4NSAuGbppoCDiVLAli4Nbhg4FQbBLyCaFwhNKKFkEhya3U0JsRMzQA288hwffrdX+C0JI3TRNbTweP6xWq7OjZM/zbrrd7icAIAAgz/Nfruveuq57UipGUXQ5GAzeKIpab+X9J4riexAEfKGs67oJADmRYRhsNpu5CEVRa1mWXw4CnU5n92WaptG2bUzTFLMsw+l0mgvRNP1TGhiNRrjZbHAfwzCqB3zfx7+EYVg9YFnWQcDzvOqBdruNcRzv5OVyib1er3oAALDVauFwOETDMFBV1dwShQFFUZ6L9m80GgczSpL0WngLs9nsqt/vL4qOCABQEIQP3/evC+Ut8/n81HGcO47jvrciy7LpZDK5J4TUS+V9kiQ51zTtUVXVJ0LIRWXxWH4BX20qTvZdAQ0AAAAASUVORK5CYII="></head>
+
+<body style="margin-bottom: 0px;">
+	<div class="navbar navbar-default navbar-fixed-top header" role="navigation" id="header-menu">
+		<div class="loading-bar reset" style="width: 0%; display: none;"></div>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div>
+					<a href="http://101.200.129.112:4567/">
+						<img class="hide forum-logo" src="">
+					</a>
+										<a href="http://101.200.129.112:4567/">
+						<h1 class="navbar-brand forum-title">动脑学院-论坛</h1>
+					</a>
+
+					<div class="header-topic-title visible-xs">
+						<span style="display: none;"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="navbar-collapse collapse navbar-ex1-collapse">
+								<ul id="main-nav" class="nav navbar-nav pull-left">
+										<li class="">
+						<a href="http://101.200.129.112:4567/unread" title="" data-original-title="未读">
+							<i id="unread-count" class="fa fa-fw fa-inbox" data-content="0"></i><span class="visible-xs-inline"> 未读</span>
+						</a>
+					</li>
+
+					<li>
+						<a href="http://101.200.129.112:4567/recent" title="" data-original-title="最新">
+							<i class="fa fa-fw fa-clock-o"></i><span class="visible-xs-inline"> 最新</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://101.200.129.112:4567/tags" title="" data-original-title="话题">
+							<i class="fa fa-fw fa-tags"></i><span class="visible-xs-inline"> 话题</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://101.200.129.112:4567/popular" title="" data-original-title="热门">
+							<i class="fa fa-fw fa-fire"></i><span class="visible-xs-inline"> 热门</span>
+						</a>
+					</li>
+					<li>
+												<a href="http://101.200.129.112:4567/users" title="" data-original-title="会员">
+							<i class="fa fa-fw fa-user"></i><span class="visible-xs-inline"> 会员</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://101.200.129.112:4567/groups" title="" data-original-title="Groups">
+							<i class="fa fa-fw fa-group"></i><span class="visible-xs-inline"> Groups</span>
+						</a>
+					</li>
+										<li>
+						<a href="http://101.200.129.112:4567/admin" title="" target="_top" data-original-title="管理">
+							<i class="fa fa-fw fa-cogs"></i><span class="visible-xs-inline"> 管理</span>
+						</a>
+					</li>
+					
+
+				</ul>
+
+								<ul id="logged-in-menu" class="nav navbar-nav navbar-right pull-right">
+					<li class="notifications dropdown text-center hidden-xs">
+						<a href="#" title="" class="dropdown-toggle" data-toggle="dropdown" id="notif_dropdown" data-original-title="通知" aria-expanded="false">
+							<i class="notification-icon fa fa-fw fa-bell-o" data-content="0"></i>
+						</a>
+						<ul id="notif-list" class="dropdown-menu" aria-labelledby="notif_dropdown"><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/12"><img class="image" src="lesson7_files/0096b0a41e7ce571da510f8e586fa8cc.png"><span class="pull-right relTime">5m</span><span class="text"><strong>amvfce</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/11"><img class="image" src="lesson7_files/1aef90f4f45636f87066b39b15a7753c.png"><span class="pull-right relTime">40m</span><span class="text"><strong>张志雄</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/10"><img class="image" src="lesson7_files/22-profileimg.jpg"><span class="pull-right relTime">1h</span><span class="text"><strong>假行僧</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/9"><img class="image" src="lesson7_files/d6eab776a81957bfcdc7c3d55b60f741.png"><span class="pull-right relTime">3h</span><span class="text"><strong>武汉-空白.........</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/8"><img class="image" src="lesson7_files/21-profileimg.jpg"><span class="pull-right relTime">3h</span><span class="text"><strong>上海马超</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/7"><img class="image" src="lesson7_files/34-profileimg.jpg"><span class="pull-right relTime">6h</span><span class="text"><strong>stay</strong> 在 <strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong> 中提到了您</span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/6"><img class="image" src="lesson7_files/bfa60d25aab89fc4ce2c7003ef0fa17f.png"><span class="pull-right relTime">6h</span><span class="text"><strong>Movo</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/5"><img class="image" src="lesson7_files/35-profileimg.jpg"><span class="pull-right relTime">8h</span><span class="text"><strong>Dawn</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/4"><img class="image" src="lesson7_files/8febb02c7489b9e96ccbec4796844437.png"><span class="pull-right relTime">9h</span><span class="text"><strong>garyhjj</strong> 回复了：<strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong></span></a></li><li class=""><a href="http://101.200.129.112:4567/topic/28/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%A4%BA%E8%8C%83-%E8%B4%B4%E4%BB%A3%E7%A0%81-%E7%88%AC%E8%99%AB%E4%BD%9C%E4%B8%9A-%E5%BF%AB%E6%9D%A5%E8%B7%9F%E5%B8%96/1"><img class="image" src="lesson7_files/e8616c26c224e299cfabca5ff0e7c242.png"><span class="pull-right relTime">11h</span><span class="text"><strong>杨万里</strong> 在 <strong>作业提交示范【贴代码】--爬虫作业【快来跟帖】</strong> 点赞了您的帖子。</span></a></li><li class="pagelink"><a href="http://101.200.129.112:4567/notifications">查看全部通知</a></li></ul>
+					</li>
+
+					<li class="visible-xs">
+						<a href="http://101.200.129.112:4567/notifications" title="" data-original-title="通知">
+							<i class="notification-icon fa fa-fw fa-bell-o" data-content="0"></i> 通知
+						</a>
+					</li>
+
+										<li class="chats dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="" id="chat_dropdown" data-original-title="聊天">
+							<i id="chat-count" class="fa fa-comment-o fa-fw" data-content="0"></i> <span class="visible-xs-inline">聊天</span>
+						</a>
+						<ul id="chat-list" class="dropdown-menu" aria-labelledby="chat_dropdown">
+							<li>
+								<a href="#"><i class="fa fa-refresh fa-spin"></i> 正在加载聊天</a>
+							</li>
+						</ul>
+					</li>
+
+					<li id="user_label" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="user_dropdown" title="" data-original-title="设置">
+							<img id="user-header-picture" src="lesson7_files/b1c526b6f5a24ff84f74f83d2551ce3f.png">
+						</a>
+						<ul id="user-control-list" class="dropdown-menu" aria-labelledby="user_dropdown">
+							<li>
+								<a id="user-profile-link" href="http://101.200.129.112:4567/user/song">
+									<i class="fa fa-fw fa-circle status online"></i> <span id="user-header-name">Song</span>
+								</a>
+							</li>
+							<li role="presentation" class="divider"></li>
+							<li>
+								<a href="#" class="user-status" data-status="online">
+									<i class="fa fa-fw fa-circle status online"></i><span> 在线</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="user-status" data-status="away">
+									<i class="fa fa-fw fa-circle status away"></i><span> 离开</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="user-status" data-status="dnd">
+									<i class="fa fa-fw fa-circle status dnd"></i><span> 请勿打扰</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="user-status" data-status="offline">
+									<i class="fa fa-fw fa-circle status offline"></i><span> 隐身</span>
+								</a>
+							</li>
+							<li role="presentation" class="divider"></li>
+							<li id="logout-link">
+								<a href="#"><i class="fa fa-fw fa-sign-out"></i><span> 退出</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				
+
+				<ul class="nav navbar-nav navbar-right pull-right">
+					<li>
+						<a href="#" id="reconnect" class="hide" title="" data-original-title="Connection to 动脑学院-论坛 has been lost, attempting to reconnect...">
+							<i class="fa fa-check"></i>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right pagination-block visible-lg visible-md">
+					<li class="dropdown">
+						<i class="fa fa-angle-double-up pointer fa-fw pagetop"></i>
+						<i class="fa fa-angle-up pointer fa-fw pageup"></i>
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span id="pagination">1 / 1</span>
+						</a>
+
+						<i class="fa fa-angle-down pointer fa-fw pagedown"></i>
+						<i class="fa fa-angle-double-down pointer fa-fw pagebottom"></i>
+
+						<div class="progress-container">
+							<div class="progress-bar" style="width: 100%;"></div>
+						</div>
+
+						<ul class="dropdown-menu" role="menu">
+  							<input class="form-control" id="indexInput" placeholder="输入索引" type="text">
+  						</ul>
+					</li>
+				</ul>
+
+				<div class="header-topic-title hidden-xs">
+					<span style="display: none;"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" id="content"><input template-variable="topic_id" value="30" type="hidden">
+<input template-variable="topic_slug" value="30/第七次课-mongoose应用与express配置-将爬虫采集的信息存入mongodb数据库-mongodb的增删改查-2017-01-12快来听直播" type="hidden">
+<input template-variable="category_id" value="1" type="hidden">
+<input template-variable="currentPage" value="1" type="hidden">
+<input template-variable="pageCount" value="1" type="hidden">
+<input template-variable="locked" template-type="boolean" value="false" type="hidden">
+<input template-variable="deleted" template-type="boolean" value="false" type="hidden">
+<input template-variable="pinned" template-type="boolean" value="false" type="hidden">
+<input template-variable="topic_name" value="第七次课《Mongoose应用与Express配置》将爬虫采集的信息存入Mongodb数据库，Mongodb的增删改查【2017.01.12快来听直播】" type="hidden">
+<input template-variable="postcount" value="1" type="hidden">
+<input template-variable="viewcount" value="29" type="hidden">
+
+<div class="topic">
+<ol class="breadcrumb">
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+		<a href="http://101.200.129.112:4567/" itemprop="url">
+			<span itemprop="title">
+				主页
+				
+			</span>
+		</a>
+	</li>
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+		<a href="http://101.200.129.112:4567/category/1/%E5%85%AC%E5%91%8A" itemprop="url">
+			<span itemprop="title">
+				公告
+				
+			</span>
+		</a>
+	</li>
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb" class="active">
+		
+			<span itemprop="title">
+				第七次课《Mongoose应用与Express配置》将爬虫采集的信息存入Mongodb数据库，Mongodb的增删改查【2017.01.12快来听直播】
+												<a target="_blank" href="http://101.200.129.112:4567/topic/30.rss"><i class="fa fa-rss-square"></i></a>
+			</span>
+		
+	</li>
+</ol>
+
+	<ul id="post-container" class="posts" data-tid="30">
+			<li class="post-row" data-pid="79" data-uid="1" data-username="Song" data-userslug="song" data-index="0" data-timestamp="1484211618717" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a id="post_anchor_0" name="0"></a>
+
+				<meta itemprop="datePublished" content="2017-01-12T09:00:18.717Z">
+				<meta itemprop="dateModified" content="2017-01-12T11:07:47.715Z">
+
+				<div class="topic-item">
+					<div class="topic-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="topic-profile-pic hidden-xs text-center">
+									<a href="http://101.200.129.112:4567/user/song">
+										<img src="lesson7_files/b1c526b6f5a24ff84f74f83d2551ce3f.png" alt="Song" class="profile-image user-img" title="" data-original-title="Song">
+									</a>
+									<small class="username" title="Song"><a href="http://101.200.129.112:4567/user/song">Song</a></small>
+
+									
+
+									
+								</div>
+								<div class="topic-text">
+																		<h3 class="topic-title">
+										<p id="topic_title_79" class="topic-title" itemprop="name"><i class="fa fa-thumb-tack hide"></i> <i class="fa fa-lock hide"></i> 第七次课《Mongoose应用与Express配置》将爬虫采集的信息存入Mongodb数据库，Mongodb的增删改查【2017.01.12快来听直播】</p>
+										<hr>
+									</h3>
+									<div id="content_79" class="post-content" itemprop="text"><ul>
+<li>MongoDB的安装</li>
+<li>NoSQL Manager for MongoDB安装及破解</li>
+<li>将爬虫采集的信息存入Mongodb数据库</li>
+<li>Mongodb的增删改查</li>
+<li>Express文件服务</li>
+</ul>
+</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="topic-footer">
+						<div class="row">
+							<div class="">
+								<small class="pull-right">
+									<span>
+																				<i class="fa fa-circle status online" title="在线"></i>
+										<span class="username-field" data-username="Song" data-uid="1">
+																						<strong><a href="http://101.200.129.112:4567/user/song" itemprop="author">Song</a></strong> 发布于 <span class="timeago" title="2017-01-12T09:00:18.717Z">大约 6 小时之前</span>
+										</span>
+									</span>
+
+																		<span>, <strong><a href="http://101.200.129.112:4567/user/song">Song</a></strong> 于 <span class="timeago" title="2017-01-12T11:07:47.715Z">大约 4 小时之前</span> 编辑了帖子</span>
+								</small>
+
+								<div class="dropdown share-dropdown">
+									<a href="#" class="dropdown-toggle postMenu favourite-tooltip" id="postMenu_79" data-toggle="dropdown">
+										<i class="fa fa-heart"></i>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="postMenu_79">
+										<li role="presentation">
+																																	<a href="#" role="menuitem" tabindex="-1" class="follow" title="停止监视此主题"><span>停止监视</span> <i class="fa fa-eye-slash"></i></a>
+										</li>
+										<li role="presentation">
+											<a role="menuitem" tabindex="-1" data-favourited="false" class="favourite">
+												<span class="favourite-text">收藏</span>
+												<span class="favouriteCount" data-favourites="0">0</span>&nbsp;
+																								<i class="fa fa-heart-o"></i>
+											</a>
+										</li>
+																				<li role="presentation" class="divider"></li>
+										<li role="presentation" class="dropdown-header">分享此帖</li>
+										<li role="presentation">
+											<a role="menuitem" class="facebook-share" tabindex="-1" href="#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+										</li>
+										<li role="presentation">
+											<a role="menuitem" class="twitter-share" tabindex="-1" href="#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+										</li>
+										<li role="presentation">
+											<a role="menuitem" class="google-share" tabindex="-1" href="#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+										</li>
+										<li class="text-center">
+											<input id="post_79_link" class="form-control post-link inline-block" type="text">
+										</li>
+									</ul>
+								</div>
+																•
+								<a href="#" class="upvote ">
+									<i class="fa fa-chevron-up"></i>
+								</a>
+								<span class="votes" data-votes="0">0</span>
+																<a href="#" class="downvote ">
+									<i class="fa fa-chevron-down"></i>
+								</a>
+
+								
+								<span class="post-tools">
+									
+																		<button class="btn btn-sm btn-link quote" type="button" title="引用"><i class="fa fa-quote-left"></i><span class="hidden-xs-inline"> 引用</span></button>
+									<button class="btn btn-sm btn-link post_reply" type="button"><i class="fa fa-reply"></i><span class="hidden-xs-inline"> 回复</span></button>
+									
+																			<button class="btn btn-sm btn-link edit" type="button" title="编辑"><i class="fa fa-pencil"></i><span class="hidden-xs-inline"> 编辑</span></button>
+										<button class="btn btn-sm btn-link delete" type="button" title="删除"><i class="fa fa-trash-o"></i><span class="hidden-xs-inline"> 删除</span></button>
+										<button class="btn btn-sm btn-link purge hidden" type="button" title="清除"><i class="fa fa-eraser"></i><span class="hidden-xs-inline"> 清除</span></button>
+										
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+
+						<li class="post-bar" data-index="0">
+<div class="inline-block">
+
+	<span class="tags">
+	<a href="http://101.200.129.112:4567/tags/mongoose"><span class="tag-item" data-tag="mongoose" style="">mongoose</span><span class="tag-topic-count">1</span></a>
+	<a href="http://101.200.129.112:4567/tags/2017.01.12"><span class="tag-item" data-tag="2017.01.12" style="">2017.01.12</span><span class="tag-topic-count">1</span></a>
+	<a href="http://101.200.129.112:4567/tags/curd"><span class="tag-item" data-tag="curd" style="">curd</span><span class="tag-topic-count">1</span></a>
+	</span>
+
+		<span>|</span>
+
+	<small class="topic-stats">
+		<span>帖子</span>
+		<strong><span class="topic-post-count human-readable-number" title="1">1</span></strong> |
+		<span>浏览</span>
+		<strong><span class="human-readable-number" title="29">29</span></strong>
+	</small>
+	<span class="browsing-users">
+		•
+		<small><span>正在浏览</span></small>
+		<div class="thread_active_users active-users inline-block"><div class="inline-block"><a data-uid="1" data-count="1" href="http://101.200.129.112:4567/user/song"><img title="" src="lesson7_files/b1c526b6f5a24ff84f74f83d2551ce3f.png" data-original-title="Song"></a></div><div class="inline-block"><a data-uid="69" data-count="1" href="http://101.200.129.112:4567/user/%E5%A4%9C%E6%9C%AA%E5%AF%92"><img title="" src="lesson7_files/0dc936ea83b0a637de73c4d26d543442.png" data-original-title="夜未寒"></a></div></div>
+		<small class="hidden"><i class="fa fa-users"></i> <span class="user-count">0</span></small>
+	</span>
+</div>
+
+<div class="topic-main-buttons pull-right inline-block">
+	<div class="loading-indicator" done="0" style="display:none;">
+		<span class="hidden-xs-inline">正在加载更多帖子</span> <i class="fa fa-refresh fa-spin"></i>
+	</div>
+		<button class="btn btn-primary post_reply" type="button">回复</button>
+
+
+
+<div class="btn-group thread-sort dropup">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">排序 <span class="caret"></span></button>
+	<ul class="dropdown-menu pull-right">
+		<li><a href="#" class="oldest_to_newest" data-sort="oldest_to_newest"><i class="fa fa-fw fa-check"></i> 从旧到新</a></li>
+		<li><a href="#" class="newest_to_oldest" data-sort="newest_to_oldest"><i class="fa fa-fw"></i> 从新到旧</a></li>
+		<li><a href="#" class="most_votes" data-sort="most_votes"><i class="fa fa-fw"></i> 最多投票</a></li>
+	</ul>
+</div>
+
+
+
+<div class="btn-group thread-tools dropup">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">主题工具 <span class="caret"></span></button>
+	<ul class="dropdown-menu pull-right">
+				<li><a href="#" class="markAsUnreadForAll"><i class="fa fa-fw fa-inbox"></i> 未读标记</a></li>
+		<li><a href="#" class="pin_thread"><i class="fa fa-fw fa-thumb-tack"></i> 置顶主题</a></li>
+		<li><a href="#" class="lock_thread"><i class="fa fa-fw fa-lock"></i> 锁定主题</a></li>
+		<li class="divider"></li>
+		<li><a href="#" class="move_thread"><i class="fa fa-fw fa-arrows"></i> 移动主题</a></li>
+		<li><a href="#" class="fork_thread"><i class="fa fa-fw fa-code-fork"></i> 分割主题</a></li>
+		<li class="divider"></li>
+
+				<li><a href="#" class="delete_thread"><span class="text-error"><i class="fa fa-fw fa-trash-o"></i> 删除主题</span></a></li>
+		<li><a href="#" class="purge_thread hidden"><span class="text-error"><i class="fa fa-fw fa-eraser"></i> 清除主题</span></a></li>
+
+		
+	</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+			</li>
+	</ul>
+
+	<div class="post-bar col-xs-12 hide bottom-post-bar">
+<div class="inline-block">
+
+	<span class="tags">
+	<a href="http://101.200.129.112:4567/tags/mongoose"><span class="tag-item" data-tag="mongoose" style="">mongoose</span><span class="tag-topic-count">1</span></a>
+	<a href="http://101.200.129.112:4567/tags/2017.01.12"><span class="tag-item" data-tag="2017.01.12" style="">2017.01.12</span><span class="tag-topic-count">1</span></a>
+	<a href="http://101.200.129.112:4567/tags/curd"><span class="tag-item" data-tag="curd" style="">curd</span><span class="tag-topic-count">1</span></a>
+	</span>
+
+		<span>|</span>
+
+	<small class="topic-stats">
+		<span>帖子</span>
+		<strong><span class="topic-post-count human-readable-number" title="1">1</span></strong> |
+		<span>浏览</span>
+		<strong><span class="human-readable-number" title="29">29</span></strong>
+	</small>
+	<span class="browsing-users">
+		•
+		<small><span>正在浏览</span></small>
+		<div class="thread_active_users active-users inline-block"><div class="inline-block"><a data-uid="1" data-count="1" href="http://101.200.129.112:4567/user/song"><img title="" src="lesson7_files/b1c526b6f5a24ff84f74f83d2551ce3f.png" data-original-title="Song"></a></div><div class="inline-block"><a data-uid="69" data-count="1" href="http://101.200.129.112:4567/user/%E5%A4%9C%E6%9C%AA%E5%AF%92"><img title="" src="lesson7_files/0dc936ea83b0a637de73c4d26d543442.png" data-original-title="夜未寒"></a></div></div>
+		<small class="hidden"><i class="fa fa-users"></i> <span class="user-count">0</span></small>
+	</span>
+</div>
+
+<div class="topic-main-buttons pull-right inline-block">
+	<div class="loading-indicator" done="0" style="display:none;">
+		<span class="hidden-xs-inline">正在加载更多帖子</span> <i class="fa fa-refresh fa-spin"></i>
+	</div>
+		<button class="btn btn-primary post_reply" type="button">回复</button>
+
+
+
+<div class="btn-group thread-sort dropup">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">排序 <span class="caret"></span></button>
+	<ul class="dropdown-menu pull-right">
+		<li><a href="#" class="oldest_to_newest" data-sort="oldest_to_newest"><i class="fa fa-fw fa-check"></i> 从旧到新</a></li>
+		<li><a href="#" class="newest_to_oldest" data-sort="newest_to_oldest"><i class="fa fa-fw"></i> 从新到旧</a></li>
+		<li><a href="#" class="most_votes" data-sort="most_votes"><i class="fa fa-fw"></i> 最多投票</a></li>
+	</ul>
+</div>
+
+
+
+<div class="btn-group thread-tools dropup">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">主题工具 <span class="caret"></span></button>
+	<ul class="dropdown-menu pull-right">
+				<li><a href="#" class="markAsUnreadForAll"><i class="fa fa-fw fa-inbox"></i> 未读标记</a></li>
+		<li><a href="#" class="pin_thread"><i class="fa fa-fw fa-thumb-tack"></i> 置顶主题</a></li>
+		<li><a href="#" class="lock_thread"><i class="fa fa-fw fa-lock"></i> 锁定主题</a></li>
+		<li class="divider"></li>
+		<li><a href="#" class="move_thread"><i class="fa fa-fw fa-arrows"></i> 移动主题</a></li>
+		<li><a href="#" class="fork_thread"><i class="fa fa-fw fa-code-fork"></i> 分割主题</a></li>
+		<li class="divider"></li>
+
+				<li><a href="#" class="delete_thread"><span class="text-error"><i class="fa fa-fw fa-trash-o"></i> 删除主题</span></a></li>
+		<li><a href="#" class="purge_thread hidden"><span class="text-error"><i class="fa fa-fw fa-eraser"></i> 清除主题</span></a></li>
+	</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+	</div>
+
+	
+
+<div id="move_thread_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="Move Topic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>移动主题</h3>
+			</div>
+			<div class="modal-body">
+				<p id="categories-loading"><i class="fa fa-spin fa-refresh"></i> 正在载入版面</p>
+				<p>
+					停用的版面为灰色
+				</p>
+				<div id="move-confirm" style="display: none;">
+					<hr>
+					<div class="alert alert-info">此主题将被移动到版块 <strong><span id="confirm-category-name"></span></strong></div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="move_thread_cancel">关闭</button>
+				<button type="button" class="btn btn-primary" id="move_thread_commit" disabled="disabled">移动</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="fork-thread-modal" class="hide" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4>分割主题</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="title">Title</label>
+					<input id="fork-title" class="form-control" placeholder="Enter new thread title" type="text"><br>
+					<label>点击将分割的帖子</label> <br>
+					<span id="fork-pids"></span>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="fork_thread_cancel">关闭</button>
+				<button type="button" class="btn btn-primary" id="fork_thread_commit" disabled="disabled">分割</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="move-post-modal" class="hide" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4>移动帖子</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="topicId">Topic ID</label>
+					<input id="topicId" class="form-control" placeholder="Enter topic ID" type="text"><br>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="move_post_cancel">关闭</button>
+				<button type="button" class="btn btn-primary" id="move_post_commit" disabled="disabled">移动</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+	<noscript>
+		<div class="text-center">
+			<ul class="pagination">
+			</ul>
+		</div>
+	</noscript>
+<div class="row"><div widget-area="footer" class="col-xs-12"><footer id="footer" class="container footer">
+	<div class="copyright">
+		Copyright © 2016 <a target="_blank" href="http://dongnaoedu.com/">DongNaoEDU Forums</a> | <a target="_blank" href="http://dongnaoedu.com/">动脑学院</a>
+	</div>
+</footer></div></div></div><!--END container -->
+
+	<div id="upload-picture-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Upload Picture" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">上传头像</h3>
+				</div>
+				<div class="modal-body">
+					<form id="uploadForm" action="" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="userPhoto">上传头像</label>
+							<input id="userPhotoInput" name="files[]" type="file">
+							<p class="help-block">您只能上传 PNG, JPG 或者 GIF 图片文件 <span id="file-size-block" class="hide"> (最大 <span id="upload-file-size"></span> kbs.)</span></p>
+						</div>
+						<input id="params" name="params" type="hidden">
+					</form>
+
+					<div id="upload-progress-box" class="progress progress-striped">
+						<div id="upload-progress-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0">
+							<span class="sr-only"> 成功</span>
+						</div>
+					</div>
+
+					<div id="alert-status" class="alert alert-info hide"></div>
+					<div id="alert-success" class="alert alert-success hide"></div>
+					<div id="alert-error" class="alert alert-danger hide"></div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+					<button id="pictureUploadSubmitBtn" class="btn btn-primary">上传头像</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div class="topic-search hidden">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default count"></button>
+			<button type="button" class="btn btn-default prev" disabled="disabled"><i class="fa fa-fw fa-angle-up"></i></button>
+			<button type="button" class="btn btn-default next" disabled="disabled"><i class="fa fa-fw fa-angle-down"></i></button>
+		</div>
+	</div>
+	<div class="alert-window alert-left-top"></div>
+	<div class="alert-window alert-left-bottom"></div>
+	<div class="alert-window alert-right-top"></div>
+	<div class="alert-window alert-right-bottom"></div>
+
+	<script>
+		require(['forum/footer']);
+	</script>
+
+
+<div class="overlay-container" style="position: fixed; bottom: 20px; right: 20px; display: none;"><div class="panel resizer pointer"><div class="panel-body"><i class="fa fa-arrows-h fa-2x fa-chevron-down"></i></div></div></div><div id="taskbar" class="taskbar navbar navbar-default navbar-fixed-bottom">
+	<div class="navbar-inner"><ul class="nav navbar-nav pull-right"></ul></div>
+</div></body></html>
